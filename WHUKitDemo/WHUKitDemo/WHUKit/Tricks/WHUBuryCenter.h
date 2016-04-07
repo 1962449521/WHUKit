@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WHULiveKeeper.h"
 
 /**
  *  善后所，下属多个葬送师
  *  提供一种非侵入机制，为任何实例不限次、不覆盖添加dealloc时的 【操作块】
  */
 @interface WHUBuryCenter : NSObject
+
++ (instancetype) sharedInstance;
 
 /**
  *  在suspect对象销毁时执行block任务

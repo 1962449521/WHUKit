@@ -47,7 +47,7 @@ static void * kBuryManKey;
 
 @implementation WHUBuryCenter
 + (instancetype) sharedInstance {
-    return [WHUBuryCenter new];
+    return [WHULiveKeeper life4Class:[self class]];
 }
 
 

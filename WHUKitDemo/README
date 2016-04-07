@@ -4,6 +4,8 @@
 1. 运行时模型 WHUObjct.h
 2. 对象销毁任务管理 WHUBuryCenter.h
 3. 方法替换 WHUMethodSwizzling.h
+4. 圆角添加辅助类 WHUCornerMaker.h
+5. 边线添加辅助类 WHUBoderMaker.h
 
 // ========= Schedule
 1. PickerView

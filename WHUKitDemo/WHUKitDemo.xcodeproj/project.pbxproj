@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432A6CDD1CB716F300518E35 /* WHUCornerMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 432A6CDA1CB716F300518E35 /* WHUCornerMaker.m */; };
+		432A6CDE1CB716F300518E35 /* WHUBorderMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 432A6CDC1CB716F300518E35 /* WHUBorderMaker.m */; };
 		43CB06771CAE70E80091C10E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB06761CAE70E80091C10E /* main.m */; };
 		43CB067A1CAE70E80091C10E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB06791CAE70E80091C10E /* AppDelegate.m */; };
 		43CB067D1CAE70E80091C10E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB067C1CAE70E80091C10E /* ViewController.m */; };
@@ -26,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		432A6CD91CB716F300518E35 /* WHUCornerMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUCornerMaker.h; sourceTree = "<group>"; };
+		432A6CDA1CB716F300518E35 /* WHUCornerMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUCornerMaker.m; sourceTree = "<group>"; };
+		432A6CDB1CB716F300518E35 /* WHUBorderMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUBorderMaker.h; sourceTree = "<group>"; };
+		432A6CDC1CB716F300518E35 /* WHUBorderMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUBorderMaker.m; sourceTree = "<group>"; };
 		43CB06721CAE70E80091C10E /* WHUKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WHUKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43CB06761CAE70E80091C10E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		43CB06781CAE70E80091C10E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +76,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432A6CD81CB716C500518E35 /* UIHelper */ = {
+			isa = PBXGroup;
+			children = (
+				432A6CD91CB716F300518E35 /* WHUCornerMaker.h */,
+				432A6CDA1CB716F300518E35 /* WHUCornerMaker.m */,
+				432A6CDB1CB716F300518E35 /* WHUBorderMaker.h */,
+				432A6CDC1CB716F300518E35 /* WHUBorderMaker.m */,
+			);
+			path = UIHelper;
+			sourceTree = "<group>";
+		};
 		43CB06691CAE70E80091C10E = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +132,7 @@
 		43CB06BB1CAEE8E10091C10E /* WHUKit */ = {
 			isa = PBXGroup;
 			children = (
+				432A6CD81CB716C500518E35 /* UIHelper */,
 				43EFE1521CAEEA8A00DBDEAB /* DescentTree */,
 				43CB06C01CAEE8E10091C10E /* Tricks */,
 				43CB06BC1CAEE8E10091C10E /* Private */,
@@ -234,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432A6CDD1CB716F300518E35 /* WHUCornerMaker.m in Sources */,
 				43CB06CB1CAEE8E10091C10E /* WHUScrollViewTool.m in Sources */,
 				43EFE1551CAEEAAB00DBDEAB /* WHUObject.m in Sources */,
 				43CB067D1CAE70E80091C10E /* ViewController.m in Sources */,
@@ -246,6 +265,7 @@
 				43EFE1581CAEEAC800DBDEAB /* WHUView.m in Sources */,
 				43EFE15E1CAEEB1700DBDEAB /* WHUViewController.m in Sources */,
 				43CB06CA1CAEE8E10091C10E /* WHUMethodSwizzling.m in Sources */,
+				432A6CDE1CB716F300518E35 /* WHUBorderMaker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
