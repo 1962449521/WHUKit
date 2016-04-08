@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WHULiveKeeper.h"
 
 @interface WHUCornerMaker : NSObject
-
-+ (instancetype _Nonnull) sharedInstance;
 
 + (BOOL) isCorneredAtView:(UIView * _Nonnull)view;
 

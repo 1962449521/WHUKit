@@ -89,10 +89,6 @@
 
 @implementation WHUCornerMaker
 
-+ (instancetype) sharedInstance {
-    return [WHULiveKeeper life4Class:[self class]];
-}
-
 #pragma mark 提供调用接口
 + (BOOL) isCorneredAtView:(UIView *)view {
     __block BOOL isCornered;

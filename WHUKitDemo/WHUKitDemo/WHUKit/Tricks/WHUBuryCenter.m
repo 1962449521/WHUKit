@@ -46,10 +46,6 @@
 static void * kBuryManKey;
 
 @implementation WHUBuryCenter
-+ (instancetype) sharedInstance {
-    return [WHULiveKeeper life4Class:[self class]];
-}
-
 
 + (void) addBuryTask:(void (^)()) buryTask  target:(id) suspect {
     WHUBuryMan *buryMan = objc_getAssociatedObject(suspect, kBuryManKey);
