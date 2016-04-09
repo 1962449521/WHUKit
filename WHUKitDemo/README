@@ -2,11 +2,11 @@
 
 // ========  done
 1. 运行时模型 WHUObjct.h
-2. 对象销毁任务管理 WHUBuryCenter.h
+2. 对象销毁任务管理 WHUBuryCenter.h  /* 该辅助类的思路由勾哲华童鞋分享，本人GET后独立编码 */
 3. 方法替换 WHUMethodSwizzling.h
 4. 圆角添加辅助类 WHUCornerMaker.h
 5. 边线添加辅助类 WHUBoderMaker.h
 
 // ========= Schedule
-1. PickerView
+1. Picker
 2. RichScrollView
