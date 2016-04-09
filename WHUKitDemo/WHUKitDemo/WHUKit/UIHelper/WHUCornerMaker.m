@@ -19,7 +19,7 @@
 
 @implementation WHUCornerKey
 
-- (instancetype)initWithColor:(UIColor *)color radius:(CGFloat) radius {
+- (instancetype) initWithColor:(UIColor *)color radius:(CGFloat) radius {
     self = [super init];
     if (self) {
         _color = color;
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (BOOL)isEqual:(WHUCornerKey *)other {
+- (BOOL) isEqual:(WHUCornerKey *)other {
     if (other == self) {
         return YES;
     } else if (![other isKindOfClass:[self class]]) {
@@ -38,7 +38,7 @@
     }
 }
 
-- (NSUInteger)hash {
+- (NSUInteger) hash {
     
     const CGFloat *colors = CGColorGetComponents(_color.CGColor);
     NSUInteger count = CGColorGetNumberOfComponents(_color.CGColor);
@@ -52,7 +52,7 @@
     return [mStr hash];
 }
 
-- (id)copyWithZone:(NSZone *)zone {
+- (id) copyWithZone:(NSZone *)zone {
     WHUCornerKey *instance =  [[[self class] allocWithZone:zone] init];
     if (instance) {
         instance.color = _color;
@@ -170,6 +170,15 @@
     [views enumerateObjectsUsingBlock:^(UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
         [self roundView:view withCornerRadius:radius defaultColor:color];
     }];
+}
+
+- (void) clearRecreatableCache {
+    [self.cornerRectPool removeAllObjects];
+}
+
+- (void) clearAllCache {
+    [self clearRecreatableCache];
+    [self.cornerPool removeAllObjects];
 }
 
 #pragma mark 私有方法

@@ -52,6 +52,7 @@
 		43CB06C51CAEE8E10091C10E /* WHUKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUKit.h; sourceTree = "<group>"; };
 		43CB06C61CAEE8E10091C10E /* WHUScrollViewTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUScrollViewTool.h; sourceTree = "<group>"; };
 		43CB06C71CAEE8E10091C10E /* WHUScrollViewTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUScrollViewTool.m; sourceTree = "<group>"; };
+		43D5BCDB1CB8C56E000D586B /* WHUCornerMaker_purgeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUCornerMaker_purgeCache.h; sourceTree = "<group>"; };
 		43EFE1531CAEEAAB00DBDEAB /* WHUObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUObject.h; sourceTree = "<group>"; };
 		43EFE1541CAEEAAB00DBDEAB /* WHUObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUObject.m; sourceTree = "<group>"; };
 		43EFE1561CAEEAC800DBDEAB /* WHUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUView.h; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		432A6CD81CB716C500518E35 /* UIHelper */ = {
 			isa = PBXGroup;
 			children = (
+				43D5BCDB1CB8C56E000D586B /* WHUCornerMaker_purgeCache.h */,
 				432A6CD91CB716F300518E35 /* WHUCornerMaker.h */,
 				432A6CDA1CB716F300518E35 /* WHUCornerMaker.m */,
 				432A6CDB1CB716F300518E35 /* WHUBorderMaker.h */,
