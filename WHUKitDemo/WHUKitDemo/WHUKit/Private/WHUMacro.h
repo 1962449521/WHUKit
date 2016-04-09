@@ -31,7 +31,8 @@ static classname *_sharedInstance = nil; \
     static dispatch_once_t onceToken; \
     dispatch_once(&onceToken, ^{      \
         if(_sharedInstance == nil) { \
-            _sharedInstance = [[super alloc] init];     \
+            _sharedInstance = [super allocWithZone:NULL];\
+            _sharedInstance = [_sharedInstance init];\
             method_exchangeImplementations(\
                 class_getClassMethod([_sharedInstance class], @selector(sharedInstance)),\
                 class_getClassMethod([_sharedInstance class], @selector(WHU_lockless_sharedInstance)));\
@@ -57,7 +58,7 @@ static classname *_sharedInstance = nil; \
 } \
 - (id)WHU_onlyInitOnce {\
     return self;\
-} \
+} 
 
 
 // -------------------- 单例 --------------------end

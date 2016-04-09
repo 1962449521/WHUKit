@@ -11,8 +11,8 @@
 
 @interface WHULiveKeeper : NSObject
 
-WHU_DECLARE_SINGLETON_FOR_CLASS(WHULiveKeeper);
+WHU_DECLARE_SINGLETON_FOR_CLASS(WHULiveKeeper)
 
-+ (id) life4Class:(Class) clazz;
++ (id) sharedInstanceWithClass:(Class) clazz;
 
 @end
