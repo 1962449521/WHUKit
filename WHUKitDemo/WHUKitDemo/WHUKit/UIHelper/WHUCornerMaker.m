@@ -188,77 +188,97 @@
 }
 
 - (void) clearRecreatableCache {
+    dispatch_semaphore_wait(_semaphore_cornerPool, DISPATCH_TIME_FOREVER);
     [self.cornerRectPool removeAllObjects];
+    dispatch_semaphore_signal(_semaphore_cornerPool);
 }
 
 - (void) clearAllCache {
+    dispatch_semaphore_wait(_semaphore_cornerPool, DISPATCH_TIME_FOREVER);
     [self clearRecreatableCache];
+    dispatch_semaphore_signal(_semaphore_cornerPool);
+    dispatch_semaphore_wait(_semaphore_cornerRectPool, DISPATCH_TIME_FOREVER);
     [self.cornerPool removeAllObjects];
+    dispatch_semaphore_signal(_semaphore_cornerRectPool);
 }
 
 #pragma mark 私有方法
 - (UIImage *) p_cornerWithColor:(UIColor *)color radius:(CGFloat) radius {
     WHUCornerKey *key = [[WHUCornerKey alloc] initWithColor:color radius:radius];
+    UIImage *corner_check = [self.cornerPool objectForKey:key];
     
-    dispatch_semaphore_wait(_semaphore_cornerPool, DISPATCH_TIME_FOREVER);
-    if (![self.cornerPool objectForKey:key]) {
-        UIImage *img;
-        radius *= [UIScreen mainScreen].scale ;
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGContextRef contextRef = CGBitmapContextCreate(NULL, radius, radius, 8, 4 * radius, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+    if (!corner_check) {
+        dispatch_semaphore_wait(_semaphore_cornerPool, DISPATCH_TIME_FOREVER);
+        UIImage *corner_reCheck = [self.cornerPool objectForKey:key];
         
-        CGContextSetFillColorWithColor(contextRef, color.CGColor);
-        CGContextMoveToPoint(contextRef, radius, 0);
-        CGContextAddLineToPoint(contextRef, 0, 0);
-        CGContextAddLineToPoint(contextRef, 0, radius);
-        CGContextAddArc(contextRef, radius, radius, radius, 180 * (M_PI / 180.0f), 270 * (M_PI / 180.0f), 0);
-        CGContextFillPath(contextRef);
-        
-        CGImageRef imageCG = CGBitmapContextCreateImage(contextRef);
-        img = [UIImage imageWithCGImage:imageCG];
-        
-        CGContextRelease(contextRef);
-        CGColorSpaceRelease(colorSpace);
-        CGImageRelease(imageCG);
-        if (img) {
-            [self.cornerPool setObject:img forKey:key];
-            dispatch_semaphore_signal(_semaphore_cornerPool);
-            return img;
+        if (!corner_reCheck) {
+            UIImage *img;
+            radius *= [UIScreen mainScreen].scale ;
+            CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+            CGContextRef contextRef = CGBitmapContextCreate(NULL, radius, radius, 8, 4 * radius, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+            
+            CGContextSetFillColorWithColor(contextRef, color.CGColor);
+            CGContextMoveToPoint(contextRef, radius, 0);
+            CGContextAddLineToPoint(contextRef, 0, 0);
+            CGContextAddLineToPoint(contextRef, 0, radius);
+            CGContextAddArc(contextRef, radius, radius, radius, 180 * (M_PI / 180.0f), 270 * (M_PI / 180.0f), 0);
+            CGContextFillPath(contextRef);
+            
+            CGImageRef imageCG = CGBitmapContextCreateImage(contextRef);
+            img = [UIImage imageWithCGImage:imageCG];
+            
+            CGContextRelease(contextRef);
+            CGColorSpaceRelease(colorSpace);
+            CGImageRelease(imageCG);
+            if (img) {
+                [self.cornerPool setObject:img forKey:key];
+                dispatch_semaphore_signal(_semaphore_cornerPool);
+                return img;
+            } else {
+                dispatch_semaphore_signal(_semaphore_cornerPool);
+                return nil;
+            }
         } else {
             dispatch_semaphore_signal(_semaphore_cornerPool);
-            return nil;
+            return corner_reCheck;
         }
     } else {
-        dispatch_semaphore_signal(_semaphore_cornerPool);
-        return (UIImage *) [self.cornerPool objectForKey:key];
+        return corner_check;
     }
 }
 
 - (NSArray<UIImage *> *) p_cornersWithColor:(UIColor *)color radius:(CGFloat) radius {
     WHUCornerKey *key = [[WHUCornerKey alloc] initWithColor:color radius:radius];
+    NSArray<UIImage *> *cornerRect_check = (NSArray<UIImage *> *)[self.cornerRectPool objectForKey:key];
 
-    dispatch_semaphore_wait(_semaphore_cornerRectPool, DISPATCH_TIME_FOREVER);
-    if (![self.cornerRectPool objectForKey:key]) {
-        UIImage *cornerImage = [self p_cornerWithColor:color radius:radius];
-        CGImageRef imageRef = cornerImage.CGImage;
-        
-        UIImage *leftUpImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationRight];
-        UIImage *rightUpImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationLeftMirrored];
-        UIImage *rightDownImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationLeft];
-        UIImage *leftDownImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationUp];;
-        
-        if (leftUpImage && rightUpImage && rightDownImage && leftDownImage) {
-            NSArray *cornerRect = @[leftUpImage, rightUpImage, rightDownImage, leftDownImage];
-            [self.cornerRectPool setObject:cornerRect forKey:key];
-            dispatch_semaphore_signal(_semaphore_cornerRectPool);
-            return cornerRect;
+    if (!cornerRect_check) {
+        dispatch_semaphore_wait(_semaphore_cornerRectPool, DISPATCH_TIME_FOREVER);
+        NSArray<UIImage *> *cornerRect_reCheck = (NSArray<UIImage *> *)[self.cornerRectPool objectForKey:key];
+
+        if (!cornerRect_reCheck) {
+            UIImage *cornerImage = [self p_cornerWithColor:color radius:radius];
+            CGImageRef imageRef = cornerImage.CGImage;
+            
+            UIImage *leftUpImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationRight];
+            UIImage *rightUpImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationLeftMirrored];
+            UIImage *rightDownImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationLeft];
+            UIImage *leftDownImage = [[UIImage alloc] initWithCGImage:imageRef scale:[UIScreen mainScreen].scale  orientation:UIImageOrientationUp];;
+            
+            if (leftUpImage && rightUpImage && rightDownImage && leftDownImage) {
+                NSArray *cornerRect = @[leftUpImage, rightUpImage, rightDownImage, leftDownImage];
+                [self.cornerRectPool setObject:cornerRect forKey:key];
+                dispatch_semaphore_signal(_semaphore_cornerRectPool);
+                return cornerRect;
+            } else {
+                dispatch_semaphore_signal(_semaphore_cornerRectPool);
+                return nil;
+            }
         } else {
             dispatch_semaphore_signal(_semaphore_cornerRectPool);
-            return nil;
+            return cornerRect_reCheck;
         }
     } else {
-        dispatch_semaphore_signal(_semaphore_cornerRectPool);
-        return (NSArray<UIImage *> *)[self.cornerRectPool objectForKey:key];
+      return cornerRect_check;
     }
 }
 

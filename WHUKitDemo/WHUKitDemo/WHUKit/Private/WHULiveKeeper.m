@@ -10,10 +10,19 @@
 #import <libkern/OSAtomic.h>  
 
 @implementation WHULiveKeeper {
-    NSMutableDictionary *singleton_list;
+    NSMutableDictionary *_singleton_list;
+    dispatch_semaphore_t _semaphore;
 }
 
 WHU_SYNTHESIZE_SINGLETON_FOR_CLASS(WHULiveKeeper)
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _singleton_list = [NSMutableDictionary dictionary];
+        _semaphore = dispatch_semaphore_create(1);
+    }
+    return self;
+}
 
 + (id) sharedInstanceWithClass:(Class) clazz {
     WHULiveKeeper *keeper = [WHULiveKeeper sharedInstance];
@@ -21,27 +30,29 @@ WHU_SYNTHESIZE_SINGLETON_FOR_CLASS(WHULiveKeeper)
 }
 
 - (id) sharedInstanceWithClass:(Class) clazz {
-    if (!singleton_list) {
-        singleton_list = [NSMutableDictionary dictionary];
-    }
-    static dispatch_semaphore_t semaphore;
-
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        semaphore = dispatch_semaphore_create(1);
-    });
-    
     NSString *className = NSStringFromClass(clazz);
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    __block id instance = [singleton_list objectForKey:className];
-    if(!instance) {
-        instance = [clazz new];
-        if (instance) {
-            [singleton_list setObject:instance forKey:className];
+    id instance_check = [_singleton_list objectForKey:className];
+    if(!instance_check) {
+        dispatch_semaphore_wait(_semaphore, DISPATCH_TIME_FOREVER);
+        id instance_recheck = [_singleton_list objectForKey:className];
+        if (!instance_recheck) {
+            id newInstance = [clazz new];
+            if (newInstance) {
+                [_singleton_list setObject:newInstance forKey:className];
+                dispatch_semaphore_signal(_semaphore);
+                return newInstance;
+            } else {
+                dispatch_semaphore_signal(_semaphore);
+                return nil;
+            }
+        } else {
+            dispatch_semaphore_signal(_semaphore);
+            return instance_recheck;
         }
+    } else {
+        return instance_check;
     }
-    dispatch_semaphore_signal(semaphore);
-    return instance;
+
 }
 
 @end
