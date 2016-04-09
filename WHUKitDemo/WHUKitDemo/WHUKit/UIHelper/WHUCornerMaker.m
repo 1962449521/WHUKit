@@ -91,7 +91,7 @@
 
 #pragma mark 提供调用接口
 + (BOOL) isCorneredAtView:(UIView *)view {
-    __block BOOL isCornered;
+    __block BOOL isCornered = NO;
     [view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[WHUCornerImageView class]]) {
             isCornered = YES;
