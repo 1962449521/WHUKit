@@ -19,6 +19,10 @@
 		43CB06C91CAEE8E10091C10E /* WHUBuryCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB06C21CAEE8E10091C10E /* WHUBuryCenter.m */; };
 		43CB06CA1CAEE8E10091C10E /* WHUMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB06C41CAEE8E10091C10E /* WHUMethodSwizzling.m */; };
 		43CB06CB1CAEE8E10091C10E /* WHUScrollViewTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB06C71CAEE8E10091C10E /* WHUScrollViewTool.m */; };
+		43D5BD011CB96D95000D586B /* WHUPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D5BD001CB96D95000D586B /* WHUPicker.m */; };
+		43D5BD071CB96E43000D586B /* P_WHUTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D5BD061CB96E43000D586B /* P_WHUTablePicker.m */; };
+		43D5BD0A1CB96E93000D586B /* P_WHUSystemPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D5BD091CB96E93000D586B /* P_WHUSystemPicker.m */; };
+		43D5BD0E1CB96FF5000D586B /* P_WHUUIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D5BD0D1CB96FF5000D586B /* P_WHUUIUtil.m */; };
 		43EFE1551CAEEAAB00DBDEAB /* WHUObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EFE1541CAEEAAB00DBDEAB /* WHUObject.m */; };
 		43EFE1581CAEEAC800DBDEAB /* WHUView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EFE1571CAEEAC800DBDEAB /* WHUView.m */; };
 		43EFE15B1CAEEAEC00DBDEAB /* WHUNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43EFE15A1CAEEAEC00DBDEAB /* WHUNavigationController.m */; };
@@ -52,7 +56,16 @@
 		43CB06C51CAEE8E10091C10E /* WHUKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUKit.h; sourceTree = "<group>"; };
 		43CB06C61CAEE8E10091C10E /* WHUScrollViewTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUScrollViewTool.h; sourceTree = "<group>"; };
 		43CB06C71CAEE8E10091C10E /* WHUScrollViewTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUScrollViewTool.m; sourceTree = "<group>"; };
-		43D5BCDB1CB8C56E000D586B /* WHUCornerMaker_purgeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUCornerMaker_purgeCache.h; sourceTree = "<group>"; };
+		43D5BCFD1CB940EA000D586B /* WHUCornerMaker_purgeCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WHUCornerMaker_purgeCache.h; sourceTree = "<group>"; };
+		43D5BCFE1CB940F7000D586B /* WHU_I_Picker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WHU_I_Picker.h; sourceTree = "<group>"; };
+		43D5BCFF1CB96D95000D586B /* WHUPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUPicker.h; sourceTree = "<group>"; };
+		43D5BD001CB96D95000D586B /* WHUPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUPicker.m; sourceTree = "<group>"; };
+		43D5BD051CB96E43000D586B /* P_WHUTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P_WHUTablePicker.h; sourceTree = "<group>"; };
+		43D5BD061CB96E43000D586B /* P_WHUTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P_WHUTablePicker.m; sourceTree = "<group>"; };
+		43D5BD081CB96E93000D586B /* P_WHUSystemPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P_WHUSystemPicker.h; sourceTree = "<group>"; };
+		43D5BD091CB96E93000D586B /* P_WHUSystemPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P_WHUSystemPicker.m; sourceTree = "<group>"; };
+		43D5BD0C1CB96FF5000D586B /* P_WHUUIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = P_WHUUIUtil.h; sourceTree = "<group>"; };
+		43D5BD0D1CB96FF5000D586B /* P_WHUUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = P_WHUUIUtil.m; sourceTree = "<group>"; };
 		43EFE1531CAEEAAB00DBDEAB /* WHUObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUObject.h; sourceTree = "<group>"; };
 		43EFE1541CAEEAAB00DBDEAB /* WHUObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WHUObject.m; sourceTree = "<group>"; };
 		43EFE1561CAEEAC800DBDEAB /* WHUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WHUView.h; sourceTree = "<group>"; };
@@ -80,10 +93,12 @@
 		432A6CD81CB716C500518E35 /* UIHelper */ = {
 			isa = PBXGroup;
 			children = (
-				43D5BCDB1CB8C56E000D586B /* WHUCornerMaker_purgeCache.h */,
+				43D5BD0B1CB96FCA000D586B /* Private */,
+				43D5BCFC1CB940AF000D586B /* PickerCluster */,
 				432A6CD91CB716F300518E35 /* WHUCornerMaker.h */,
 				432A6CDA1CB716F300518E35 /* WHUCornerMaker.m */,
 				432A6CDB1CB716F300518E35 /* WHUBorderMaker.h */,
+				43D5BCFD1CB940EA000D586B /* WHUCornerMaker_purgeCache.h */,
 				432A6CDC1CB716F300518E35 /* WHUBorderMaker.m */,
 			);
 			path = UIHelper;
@@ -164,6 +179,29 @@
 				43CB06C41CAEE8E10091C10E /* WHUMethodSwizzling.m */,
 			);
 			path = Tricks;
+			sourceTree = "<group>";
+		};
+		43D5BCFC1CB940AF000D586B /* PickerCluster */ = {
+			isa = PBXGroup;
+			children = (
+				43D5BCFE1CB940F7000D586B /* WHU_I_Picker.h */,
+				43D5BCFF1CB96D95000D586B /* WHUPicker.h */,
+				43D5BD001CB96D95000D586B /* WHUPicker.m */,
+				43D5BD081CB96E93000D586B /* P_WHUSystemPicker.h */,
+				43D5BD091CB96E93000D586B /* P_WHUSystemPicker.m */,
+				43D5BD051CB96E43000D586B /* P_WHUTablePicker.h */,
+				43D5BD061CB96E43000D586B /* P_WHUTablePicker.m */,
+			);
+			path = PickerCluster;
+			sourceTree = "<group>";
+		};
+		43D5BD0B1CB96FCA000D586B /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				43D5BD0C1CB96FF5000D586B /* P_WHUUIUtil.h */,
+				43D5BD0D1CB96FF5000D586B /* P_WHUUIUtil.m */,
+			);
+			path = Private;
 			sourceTree = "<group>";
 		};
 		43EFE1521CAEEA8A00DBDEAB /* DescentTree */ = {
@@ -255,9 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				432A6CDD1CB716F300518E35 /* WHUCornerMaker.m in Sources */,
+				43D5BD011CB96D95000D586B /* WHUPicker.m in Sources */,
 				43CB06CB1CAEE8E10091C10E /* WHUScrollViewTool.m in Sources */,
 				43EFE1551CAEEAAB00DBDEAB /* WHUObject.m in Sources */,
 				43CB067D1CAE70E80091C10E /* ViewController.m in Sources */,
+				43D5BD0A1CB96E93000D586B /* P_WHUSystemPicker.m in Sources */,
 				43CB067A1CAE70E80091C10E /* AppDelegate.m in Sources */,
 				43CB06C91CAEE8E10091C10E /* WHUBuryCenter.m in Sources */,
 				43CB06C81CAEE8E10091C10E /* WHULiveKeeper.m in Sources */,
@@ -265,6 +305,8 @@
 				43CB06771CAE70E80091C10E /* main.m in Sources */,
 				43EFE1611CAEEB4900DBDEAB /* WHUTableViewCell.m in Sources */,
 				43EFE1581CAEEAC800DBDEAB /* WHUView.m in Sources */,
+				43D5BD0E1CB96FF5000D586B /* P_WHUUIUtil.m in Sources */,
+				43D5BD071CB96E43000D586B /* P_WHUTablePicker.m in Sources */,
 				43EFE15E1CAEEB1700DBDEAB /* WHUViewController.m in Sources */,
 				43CB06CA1CAEE8E10091C10E /* WHUMethodSwizzling.m in Sources */,
 				432A6CDE1CB716F300518E35 /* WHUBorderMaker.m in Sources */,
@@ -380,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WHUKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.WHUKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -391,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WHUKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.WHUKitDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

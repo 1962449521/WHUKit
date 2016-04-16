@@ -78,8 +78,8 @@
 @interface WHUCornerMaker ()
 
 #pragma mark 实现享元模式所需的重用池
-@property (nonatomic, strong) NSMutableDictionary<WHUCornerKey *, UIImage *> *cornerPool;
-@property (nonatomic, strong) NSMutableDictionary<WHUCornerKey *, NSArray<UIImage *> *> *cornerRectPool;
+@property (nonatomic, strong) NSCache<WHUCornerKey *, UIImage *> *cornerPool;
+@property (nonatomic, strong) NSCache<WHUCornerKey *, NSArray<UIImage *> *> *cornerRectPool;
 
 #pragma mark 创建或获取可重用的圆角图片
 - (UIImage *) p_cornerWithColor:(UIColor *)color radius:(CGFloat) radius;
@@ -92,11 +92,11 @@
     dispatch_semaphore_t _semaphore_cornerRectPool;
 }
 
-- (instancetype)init {
+- (instancetype) init {
     if (self = [super init]) {
-        _cornerPool = [NSMutableDictionary dictionary];
+        _cornerPool = [NSCache new];
         _semaphore_cornerPool = dispatch_semaphore_create(1);
-        _cornerRectPool = [NSMutableDictionary dictionary];
+        _cornerRectPool = [NSCache new];
         _semaphore_cornerRectPool = dispatch_semaphore_create(1);
     }
     return self;
@@ -124,7 +124,7 @@
     }];
     
     UIView *superview = view.superview;
-    while (superview.backgroundColor == nil || CGColorEqualToColor(superview.backgroundColor.CGColor, [UIColor clearColor].CGColor)) {
+    while (superview.backgroundColor == nil || CGColorGetAlpha(superview.backgroundColor.CGColor) == 0 || superview.alpha == 0 || superview.opaque == 0 ) {
         if (!superview) {
             break;
         }
@@ -143,7 +143,7 @@
     CGFloat value1 = CGRectGetWidth(view.frame) - radius / 2.0;
     CGFloat value2 = radius / 2.0;
     CGFloat value3 = CGRectGetHeight(view.frame) - radius / 2.0;
-
+    
     
     if (corners & UIRectCornerTopLeft) {
         WHUCornerImageView *leftUpImageView = [[WHUCornerImageView alloc]initWithImage:arr[0]];
@@ -161,7 +161,7 @@
         WHUCornerImageView *rightDownImageView = [[WHUCornerImageView alloc]initWithImage:arr[2]];
         rightDownImageView.center = CGPointMake(value1, value3);
         [view addSubview:rightDownImageView];
-
+        
     }
     
     if (corners & UIRectCornerBottomLeft) {
@@ -203,6 +203,10 @@
 }
 
 #pragma mark 私有方法
+FOUNDATION_STATIC_INLINE NSUInteger NEPCacheCostForImage(UIImage *image) {
+    return image.size.height * image.size.width * image.scale * image.scale;
+}
+
 - (UIImage *) p_cornerWithColor:(UIColor *)color radius:(CGFloat) radius {
     WHUCornerKey *key = [[WHUCornerKey alloc] initWithColor:color radius:radius];
     UIImage *corner_check = [self.cornerPool objectForKey:key];
@@ -215,7 +219,7 @@
             UIImage *img;
             radius *= [UIScreen mainScreen].scale ;
             CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-            CGContextRef contextRef = CGBitmapContextCreate(NULL, radius, radius, 8, 4 * radius, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
+            CGContextRef contextRef = CGBitmapContextCreate(NULL, radius, radius, 8, 0, colorSpace, kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
             
             CGContextSetFillColorWithColor(contextRef, color.CGColor);
             CGContextMoveToPoint(contextRef, radius, 0);
@@ -231,7 +235,7 @@
             CGColorSpaceRelease(colorSpace);
             CGImageRelease(imageCG);
             if (img) {
-                [self.cornerPool setObject:img forKey:key];
+                [self.cornerPool setObject:img forKey:key cost:NEPCacheCostForImage(img)];
                 dispatch_semaphore_signal(_semaphore_cornerPool);
                 return img;
             } else {
@@ -250,11 +254,11 @@
 - (NSArray<UIImage *> *) p_cornersWithColor:(UIColor *)color radius:(CGFloat) radius {
     WHUCornerKey *key = [[WHUCornerKey alloc] initWithColor:color radius:radius];
     NSArray<UIImage *> *cornerRect_check = (NSArray<UIImage *> *)[self.cornerRectPool objectForKey:key];
-
+    
     if (!cornerRect_check) {
         dispatch_semaphore_wait(_semaphore_cornerRectPool, DISPATCH_TIME_FOREVER);
         NSArray<UIImage *> *cornerRect_reCheck = (NSArray<UIImage *> *)[self.cornerRectPool objectForKey:key];
-
+        
         if (!cornerRect_reCheck) {
             UIImage *cornerImage = [self p_cornerWithColor:color radius:radius];
             CGImageRef imageRef = cornerImage.CGImage;
@@ -266,7 +270,7 @@
             
             if (leftUpImage && rightUpImage && rightDownImage && leftDownImage) {
                 NSArray *cornerRect = @[leftUpImage, rightUpImage, rightDownImage, leftDownImage];
-                [self.cornerRectPool setObject:cornerRect forKey:key];
+                [self.cornerRectPool setObject:cornerRect forKey:key cost:NEPCacheCostForImage(cornerImage) * 4];
                 dispatch_semaphore_signal(_semaphore_cornerRectPool);
                 return cornerRect;
             } else {
@@ -278,7 +282,7 @@
             return cornerRect_reCheck;
         }
     } else {
-      return cornerRect_check;
+        return cornerRect_check;
     }
 }
 
